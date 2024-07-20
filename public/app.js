@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const secTimer = document.querySelector(".sec-timer");
   const timer = document.querySelector(".timer");
   const btnDiv = document.querySelector(".btn-div");
+  let userOption;
+  let questionNumber;
 
+  disableBtn();
   // creating object for storing questions and answers
   const question1 = {
     question: "What is the color of the sky?",
@@ -39,34 +42,48 @@ document.addEventListener("DOMContentLoaded", () => {
   buttons[3].innerText = question1.option3;
 
   // function to check answer
-  function checkAnswer(option) {}
+  function checkAnswer() {}
 
   buttons.forEach((button) => {
+    disableBtn();
+    // to remove background of other options when selecting one option
     button.addEventListener("click", (event) => {
       buttons.forEach((btn) => {
-        if (btn.classList.contains("background")) {
-          btn.classList.remove("background");
-          console.log("hi");
-        } else {
-          if (event.target.nodeName === "BUTTON") {
-            const userOption = event.target.id;
-            event.target.classList.add("background");
-            console.log("hello");
-          }
+        btn.classList.remove("background");
+        // adding background for only the selected option
+        if (event.target.nodeName === "BUTTON") {
+          userOption = event.target.id;
+          event.target.classList.add("background");
         }
       });
     });
   });
 
+  function disableBtn() {
+    // enabling the buttons after starting the game
+    buttons.forEach((button) => {
+      button.disabled = true;
+    });
+  }
+
+  function enableBtn() {
+    // enabling the buttons after starting the game
+    buttons.forEach((button) => {
+      button.disabled = false;
+    });
+  }
+
   // event listener for starting the game
   startBtn.addEventListener("click", () => {
+    enableBtn();
     let i = 9;
     function displaySeconds() {
       secTimer.innerText = i;
       i--;
       if (i < 0) {
         stopTimer(intervalId);
-        secTimer.style.fontWeight = "bold";
+        disableBtn();
+        checkAnswer();
       }
     }
     // function for creating the timer

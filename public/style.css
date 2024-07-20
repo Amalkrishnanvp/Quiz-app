@@ -593,6 +593,10 @@ video {
   margin-bottom: auto;
 }
 
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+
 .mr-44 {
   margin-right: 11rem;
 }
@@ -603,6 +607,10 @@ video {
 
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mb-5 {
+  margin-bottom: 1.25rem;
 }
 
 .flex {
