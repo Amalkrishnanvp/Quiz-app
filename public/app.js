@@ -5,17 +5,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const secTimer = document.querySelector(".sec-timer");
   const timer = document.querySelector(".timer");
   const btnDiv = document.querySelector(".btn-div");
-  let userOption;
-  let questionNumber;
+  const currentQuestion = document.querySelector(".current-question");
+  const totalQuestion = document.querySelector(".total-question");
+  let userAnswer;
+  let questionNumber = 1;
+  let total = 3;
 
   disableBtn();
   // creating object for storing questions and answers
   const question1 = {
     question: "What is the color of the sky?",
-    answer: "Blue",
-    option1: "Red",
-    option2: "Pink",
-    option3: "Green",
+    option1: "Blue",
+    option2: "Red",
+    option3: "Pink",
+    option4: "Green",
   };
 
   const question2 = {
@@ -34,30 +37,58 @@ document.addEventListener("DOMContentLoaded", () => {
     option3: "15",
   };
 
-  // for question 1
-  questionDiv.innerText = question1.question;
-  buttons[0].innerText = question1.answer;
-  buttons[1].innerText = question1.option1;
-  buttons[2].innerText = question1.option2;
-  buttons[3].innerText = question1.option3;
+  // for adding questions and answers
+  function question() {
+    switch (questionNumber) {
+      case 1:
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].innerText = question1[`option${i + 1}`];
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+  question();
+  currentQuestion.innerText = questionNumber;
+  totalQuestion.innerText = total;
 
   // function to check answer
-  function checkAnswer() {}
+  function checkAnswer() {
+    switch (questionNumber) {
+      case 1:
+        if ((userAnswer = buttons[0].id)) {
+          console.log("correct answer");
+        } else {
+          console.log("wrong answer");
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
 
   buttons.forEach((button) => {
     disableBtn();
-    // to remove background of other options when selecting one option
     button.addEventListener("click", (event) => {
-      buttons.forEach((btn) => {
-        btn.classList.remove("background");
-        // adding background for only the selected option
-        if (event.target.nodeName === "BUTTON") {
-          userOption = event.target.id;
-          event.target.classList.add("background");
-        }
-      });
+      removeBackground();
+      // adding background for only the selected option
+      if (event.target.nodeName === "BUTTON") {
+        userOption = event.target.id;
+        event.target.classList.add("background");
+        userAnswer = event.target.id;
+      }
     });
   });
+
+  // to remove background of other options when selecting one option
+  function removeBackground() {
+    buttons.forEach((btn) => {
+      btn.classList.remove("background");
+    });
+  }
 
   function disableBtn() {
     // enabling the buttons after starting the game
