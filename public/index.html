@@ -11,15 +11,15 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="bg-blue-600">
+<body class="bg-blue-600 h-screen">
 
-    <div class="container">
-        <div class="game flex justify-center h-screen items-center flex-col">
-            <!-- <div class="text-white mb-5">result shower</div> -->
-            <div class="wrapper bg-white p-6 rounded-md w-fit h-fit">
-                <div class="box-1 flex justify-between border-b border-gray-400 pt-4 pb-3">
-                    <div class="question-count text-gray-700 mr-44 my-auto"><span class="current-question"></span> of
-                        <span class="total-question"></span> question</div>
+    <div class="container p-5 h-full mx-auto flex items-center justify-center">
+        <div class="game flex justify-center h-auto items-center flex-col">
+            <div class="wrapper bg-white p-6 rounded-md">
+                <div class="box-1 flex border-b border-gray-400 pt-4 pb-3">
+                    <div class="question-count text-gray-700 my-auto mr-20 sm:mr-40"><span class="current-question"></span> of
+                        <span class="total-question"></span> question
+                    </div>
                     <button class="timer bg-blue-200 px-6 py-2 rounded-full w-24 flex items-center justify-between">
                         <i class="fa-solid fa-stopwatch text-blue-600 text-md"></i>
                         <div><span class="sec-timer text-sm">10</span><span>s</span></div>
@@ -34,10 +34,12 @@
                         <button id="btn-four" class="btn text-left p-2 border border-gray-400 rounded-md"></button>
                     </div>
                 </div>
-                <div class="box-3 pb-5 pt-6 flex justify-between">
-                    <button class="start-btn px-4 py-1 text-white bg-gray-700 rounded-md hover:bg-gray-600">Start
+                <div class="flex flex-col box-3 pb-5 pt-6 md:justify-between md:flex-row-reverse">
+                    <div class="text-black my-auto px-5 py-1 rounded-md text-center"><span class="font-semibold">Score:
+                        </span><span>0 </span>/ 10</div>
+                        <button class="next-btn px-4 py-2.5 md:py-1 text-white bg-blue-600 rounded-sm hover:bg-blue-500 md:ml-4 mt-4 md:mt-0">Next</button>
+                    <button class="start-btn px-4 py-2.5 md:py-1 text-white bg-gray-700 rounded-sm md:rounded-md hover:bg-gray-600 mt-4 md:mt-0">Start
                         Quiz</button>
-                    <button class="next-btn px-4 py-1 text-white bg-blue-600 rounded-sm hover:bg-blue-500">Next</button>
                 </div>
             </div>
         </div>

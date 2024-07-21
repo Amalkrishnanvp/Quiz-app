@@ -5,7 +5,9 @@
 * {
   font-family: sans-serif;
 }
-
 .background {
-  background-color: lightgray;
+  background-color: rgb(153, 153, 153);
+}
+.background-green {
+  background-color: rgb(62, 230, 62);
 }

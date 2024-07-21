@@ -3,10 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const buttons = document.querySelectorAll(".btn");
   const startBtn = document.querySelector(".start-btn");
   const secTimer = document.querySelector(".sec-timer");
-  const timer = document.querySelector(".timer");
-  const btnDiv = document.querySelector(".btn-div");
   const currentQuestion = document.querySelector(".current-question");
   const totalQuestion = document.querySelector(".total-question");
+  const nextBtn = document.querySelector(".next-btn");
   let userAnswer;
   let questionNumber = 1;
   let total = 3;
@@ -23,10 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const question2 = {
     question: "Which country has highest population?",
-    answer: "India",
-    option1: "China",
-    option2: "America",
-    option3: "Africa",
+    option1: "America",
+    option2: "China",
+    option3: "India",
+    option4: "Africa",
   };
 
   const question3 = {
@@ -41,8 +40,16 @@ document.addEventListener("DOMContentLoaded", () => {
   function question() {
     switch (questionNumber) {
       case 1:
+        questionDiv.innerText = question1.question;
         for (let i = 0; i < buttons.length; i++) {
           buttons[i].innerText = question1[`option${i + 1}`];
+        }
+        break;
+
+      case 2:
+        questionDiv.innerText = question2.question;
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].innerText = question2[`option${i + 1}`];
         }
         break;
 
@@ -50,20 +57,45 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
     }
   }
+
   question();
-  currentQuestion.innerText = questionNumber;
-  totalQuestion.innerText = total;
+
+  // function to set the question number
+  function questionNumberSetter() {
+    if (questionNumber <= total) {
+      currentQuestion.innerText = questionNumber;
+    }
+  }
+  questionNumberSetter();
+
+  // function to set the total question number;
+  function totalQuestionNumberSetter() {
+    totalQuestion.innerText = total;
+  }
+  totalQuestionNumberSetter();
 
   // function to check answer
   function checkAnswer() {
     switch (questionNumber) {
       case 1:
-        if ((userAnswer = buttons[0].id)) {
+        if (userAnswer === buttons[0].id) {
           console.log("correct answer");
         } else {
           console.log("wrong answer");
+          document.getElementById(userAnswer).style.backgroundColor =
+            "rgb(230, 58, 58)";
         }
         break;
+
+        case 2:
+          if (userAnswer === buttons[2].id) {
+            console.log("correct answer");
+          } else {
+            console.log("wrong answer");
+            document.getElementById(userAnswer).style.backgroundColor =
+              "rgb(230, 58, 58)";
+          }
+          break;
 
       default:
         break;
@@ -90,18 +122,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // function to disabling the buttons
   function disableBtn() {
-    // enabling the buttons after starting the game
+    // disbaling the buttons after starting the game
     buttons.forEach((button) => {
       button.disabled = true;
     });
   }
 
+  // function to enable buttons
   function enableBtn() {
     // enabling the buttons after starting the game
     buttons.forEach((button) => {
       button.disabled = false;
     });
+  }
+
+  // function to show answer
+  function answerShower(questionNumber) {
+    switch (questionNumber) {
+      case 1:
+        buttons[0].classList.add("background-green");
+        break;
+
+        case 2:
+        buttons[2].classList.add("background-green");
+        break;
+
+      default:
+        break;
+    }
   }
 
   // event listener for starting the game
@@ -114,6 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (i < 0) {
         stopTimer(intervalId);
         disableBtn();
+        answerShower(questionNumber);
         checkAnswer();
       }
     }
@@ -125,4 +176,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function stopTimer(intervalId) {
     clearInterval(intervalId);
   }
+
+  // event listener for moving to next question
+  nextBtn.addEventListener("click", () => {
+    questionNumber++;
+    questionNumberSetter();
+    question();
+  });
 });
