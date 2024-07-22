@@ -2,12 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  font-family: sans-serif;
+body {
+  font-family: 'Outfit';
 }
 .background {
   background-color: rgb(153, 153, 153);
 }
 .background-green {
   background-color: rgb(62, 230, 62);
+}
+.end-btn {
+  display: none;
+}
+.background-white {
+  background-color: white;
+}
+.background-red {
+  background-color: rgb(230, 58, 58);
 }

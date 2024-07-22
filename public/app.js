@@ -6,34 +6,56 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentQuestion = document.querySelector(".current-question");
   const totalQuestion = document.querySelector(".total-question");
   const nextBtn = document.querySelector(".next-btn");
-  let userAnswer;
+  const endBtn = document.querySelector(".end-btn");
+  const scoreShower = document.querySelector(".score-shower");
+  let userAnswer = "";
   let questionNumber = 1;
-  let total = 3;
+  let total = 5;
+  let userScore = 0;
 
   disableBtn();
+  scoreUpdater();
+  secTimer.innerText = 10;
+
   // creating object for storing questions and answers
   const question1 = {
-    question: "What is the color of the sky?",
-    option1: "Blue",
-    option2: "Red",
-    option3: "Pink",
-    option4: "Green",
+    question: "What is the capital city of France?",
+    option1: "Paris",
+    option2: "Berlin",
+    option3: "Madrid",
+    option4: "Rome",
   };
 
   const question2 = {
-    question: "Which country has highest population?",
-    option1: "America",
-    option2: "China",
-    option3: "India",
-    option4: "Africa",
+    question: "Who wrote the play 'Romeo and Juliet'?",
+    option1: "Charles Dickens",
+    option2: "Mark Twain",
+    option3: "William Shakespeare",
+    option4: "Jane Austen",
   };
 
   const question3 = {
-    question: "How many states in kerala?",
-    answer: "14",
-    option1: "12",
-    option2: "13",
-    option3: "15",
+    question: "In which year did the Titanic sink?",
+    option1: "1905",
+    option2: "1935",
+    option3: "1912",
+    option4: "1920",
+  };
+
+  const question4 = {
+    question: "Which country is known as the Land of the Rising Sun?",
+    option1: "China",
+    option2: "Japan",
+    option3: "South Korea",
+    option4: "Thailand",
+  };
+
+  const question5 = {
+    question: "Who painted the Mona Lisa?",
+    option1: "Vincent van Gogh",
+    option2: "Pablo Picasso",
+    option3: "Michelangelo",
+    option4: "Leonardo da Vinci",
   };
 
   // for adding questions and answers
@@ -53,6 +75,27 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         break;
 
+      case 3:
+        questionDiv.innerText = question3.question;
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].innerText = question3[`option${i + 1}`];
+        }
+        break;
+
+      case 4:
+        questionDiv.innerText = question4.question;
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].innerText = question4[`option${i + 1}`];
+        }
+        break;
+
+      case 5:
+        questionDiv.innerText = question5.question;
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].innerText = question5[`option${i + 1}`];
+        }
+        break;
+
       default:
         break;
     }
@@ -68,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   questionNumberSetter();
 
-  // function to set the total question number;
+  // function to set the total question number
   function totalQuestionNumberSetter() {
     totalQuestion.innerText = total;
   }
@@ -76,29 +119,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // function to check answer
   function checkAnswer() {
-    switch (questionNumber) {
-      case 1:
-        if (userAnswer === buttons[0].id) {
-          console.log("correct answer");
-        } else {
-          console.log("wrong answer");
-          document.getElementById(userAnswer).style.backgroundColor =
-            "rgb(230, 58, 58)";
-        }
-        break;
+    if (userAnswer != "") {
+      switch (questionNumber) {
+        case 1:
+          if (userAnswer === buttons[0].id) {
+            console.log("correct answer");
+            userScore++;
+          } else {
+            console.log("wrong answer");
+            document.getElementById(userAnswer).classList.add("background-red");
+          }
+          break;
 
         case 2:
           if (userAnswer === buttons[2].id) {
             console.log("correct answer");
+            userScore++;
           } else {
-            console.log("wrong answer");
-            document.getElementById(userAnswer).style.backgroundColor =
-              "rgb(230, 58, 58)";
+            document.getElementById(userAnswer).classList.add("background-red");
           }
           break;
 
-      default:
-        break;
+        case 3:
+          if (userAnswer === buttons[2].id) {
+            console.log("correct answer");
+            userScore++;
+          } else {
+            document.getElementById(userAnswer).classList.add("background-red");
+          }
+          break;
+
+        case 4:
+          if (userAnswer === buttons[1].id) {
+            console.log("correct answer");
+            userScore++;
+          } else {
+            document.getElementById(userAnswer).classList.add("background-red");
+          }
+          break;
+
+        case 5:
+          if (userAnswer === buttons[3].id) {
+            console.log("correct answer");
+            userScore++;
+          } else {
+            document.getElementById(userAnswer).classList.add("background-red");
+          }
+          break;
+
+        default:
+          break;
+      }
     }
   }
 
@@ -145,8 +216,20 @@ document.addEventListener("DOMContentLoaded", () => {
         buttons[0].classList.add("background-green");
         break;
 
-        case 2:
+      case 2:
         buttons[2].classList.add("background-green");
+        break;
+
+      case 3:
+        buttons[2].classList.add("background-green");
+        break;
+
+      case 4:
+        buttons[1].classList.add("background-green");
+        break;
+
+      case 5:
+        buttons[1].classList.add("background-green");
         break;
 
       default:
@@ -154,9 +237,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // event listener for starting the game
-  startBtn.addEventListener("click", () => {
-    enableBtn();
+  // function to end the game
+  function endGame() {
+    endBtn.style.display = "initial";
+  }
+
+  // to update the score
+  function scoreUpdater() {
+    scoreShower.innerText = userScore;
+  }
+
+  // to start the timer
+  function startTimer() {
+    secTimer.innerText = 10;
     let i = 9;
     function displaySeconds() {
       secTimer.innerText = i;
@@ -166,10 +259,25 @@ document.addEventListener("DOMContentLoaded", () => {
         disableBtn();
         answerShower(questionNumber);
         checkAnswer();
+        scoreUpdater();
       }
     }
     // function for creating the timer
     const intervalId = setInterval(displaySeconds, 1000);
+  }
+
+  // function to show the next button
+  function showNextBtn() {
+    nextBtn.classList.remove("invisible");
+  }
+
+  // event listener for starting the game
+  startBtn.addEventListener("click", () => {
+    startBtn.style.display = "none";
+    endGame();
+    enableBtn();
+    startTimer();
+    showNextBtn();
   });
 
   // function to stop the timer
@@ -177,10 +285,26 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(intervalId);
   }
 
+  // // function to remove background of options
+  function removeColor() {
+    buttons.forEach((btn) => {
+      if (btn.classList.contains("background-green")) {
+        btn.classList.remove("background-green");
+      } else if (btn.classList.contains("background-red")) {
+        btn.classList.remove("background-red");
+      }
+    });
+  }
+
   // event listener for moving to next question
   nextBtn.addEventListener("click", () => {
     questionNumber++;
+    userAnswer = "";
     questionNumberSetter();
     question();
+    removeColor();
+    enableBtn();
+    removeBackground();
+    startTimer();
   });
 });

@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto+Slab:wght@100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body class="bg-blue-600 h-screen">
@@ -17,12 +22,13 @@
         <div class="game flex justify-center h-auto items-center flex-col">
             <div class="wrapper bg-white p-6 rounded-md">
                 <div class="box-1 flex border-b border-gray-400 pt-4 pb-3">
-                    <div class="question-count text-gray-700 my-auto mr-20 sm:mr-40"><span class="current-question"></span> of
+                    <div class="question-count text-gray-700 my-auto mr-20 sm:mr-44"><span
+                            class="current-question"></span> of
                         <span class="total-question"></span> question
                     </div>
                     <button class="timer bg-blue-200 px-6 py-2 rounded-full w-24 flex items-center justify-between">
                         <i class="fa-solid fa-stopwatch text-blue-600 text-md"></i>
-                        <div><span class="sec-timer text-sm">10</span><span>s</span></div>
+                        <div><span class="sec-timer text-sm"></span><span>s</span></div>
                     </button>
                 </div>
                 <div class="box-2 mt-4">
@@ -36,9 +42,14 @@
                 </div>
                 <div class="flex flex-col box-3 pb-5 pt-6 md:justify-between md:flex-row-reverse">
                     <div class="text-black my-auto px-5 py-1 rounded-md text-center"><span class="font-semibold">Score:
-                        </span><span>0 </span>/ 10</div>
-                        <button class="next-btn px-4 py-2.5 md:py-1 text-white bg-blue-600 rounded-sm hover:bg-blue-500 md:ml-4 mt-4 md:mt-0">Next</button>
-                    <button class="start-btn px-4 py-2.5 md:py-1 text-white bg-gray-700 rounded-sm md:rounded-md hover:bg-gray-600 mt-4 md:mt-0">Start
+                        </span><span class="score-shower"></span> / 10</div>
+                    <button
+                        class="next-btn px-4 py-2.5 md:py-1 text-white bg-blue-600 rounded-sm hover:bg-blue-500 md:ml-4 mt-4 md:mt-0 invisible">Next</button>
+                    <button
+                        class="start-btn px-4 py-2.5 md:py-1 text-white bg-gray-700 rounded-sm md:rounded-md hover:bg-gray-600 mt-4 md:mt-0">Start
+                        Quiz</button>
+                    <button
+                        class="end-btn px-4 py-2.5 md:py-1 text-white bg-gray-700 rounded-sm md:rounded-md hover:bg-gray-600 mt-4 md:mt-0">End
                         Quiz</button>
                 </div>
             </div>
