@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let questionNumber = 1;
   let total = 5;
   let userScore = 0;
+  let globalIntervalId;
 
   disableBtn();
   scoreUpdater();
@@ -239,8 +240,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // function to end the game
   function endGame() {
-    endBtn.style.display = "initial";
+    disableBtn();
+    stopTimer(globalIntervalId);
+    secTimer.innerText = 0;
+    removeColor();
+    removeBackground();
+    questionNumber = 1;
+    questionNumberSetter();
+    question();
+    userScore = 0;
+    scoreUpdater();
+    userAnswer = "";
+    nextBtn.classList.add("invisible");
   }
+
+  endBtn.addEventListener("click", () => {
+    startBtn.style.display = "initial";
+    endBtn.style.display = "none";
+    endGame();
+  });
 
   // to update the score
   function scoreUpdater() {
@@ -255,6 +273,9 @@ document.addEventListener("DOMContentLoaded", () => {
       secTimer.innerText = i;
       i--;
       if (i < 0) {
+        if (questionNumber < 5) {
+          showNextBtn();
+        }
         stopTimer(intervalId);
         disableBtn();
         answerShower(questionNumber);
@@ -264,6 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     // function for creating the timer
     const intervalId = setInterval(displaySeconds, 1000);
+    globalIntervalId = intervalId;
   }
 
   // function to show the next button
@@ -271,13 +293,16 @@ document.addEventListener("DOMContentLoaded", () => {
     nextBtn.classList.remove("invisible");
   }
 
+  nextBtn.addEventListener("click", () => {
+    nextBtn.classList.add("invisible");
+  });
+
   // event listener for starting the game
   startBtn.addEventListener("click", () => {
     startBtn.style.display = "none";
-    endGame();
+    endBtn.style.display = "initial";
     enableBtn();
     startTimer();
-    showNextBtn();
   });
 
   // function to stop the timer
