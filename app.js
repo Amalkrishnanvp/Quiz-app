@@ -118,6 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   totalQuestionNumberSetter();
 
+  function endCard() {
+    console.log("ended");
+  }
+
   // function to check answer
   function checkAnswer() {
     if (userAnswer != "") {
@@ -231,6 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       case 5:
         buttons[1].classList.add("background-green");
+        endCard();
         break;
 
       default:
